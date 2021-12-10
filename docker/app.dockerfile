@@ -1,7 +1,7 @@
 # FROM alpine
 
 # CMD tail -f /dev/null # keep container up
-FROM php:8-apache
+FROM php:8.0.8-apache
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends nano zip unzip git

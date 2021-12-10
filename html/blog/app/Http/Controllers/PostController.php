@@ -11,11 +11,11 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Post[]|\Illuminate\Database\Eloquent\Collection
      */
     public function index()
     {
-        //
+        return Post::latest()->get();
     }
 
     /**
@@ -39,6 +39,10 @@ class PostController extends Controller
         $post = new Post();
         $post->content = $request->input('content');
         $post->save();
+
+        if($request->expectsJson()){
+            return $post;
+        }
         return response()->redirectTo('/');
     }
 
@@ -50,7 +54,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return $post->load('comments');
     }
 
     /**
